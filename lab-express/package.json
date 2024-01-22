@@ -1,0 +1,22 @@
+{
+  "name": "lab-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lab3": "nodemon lab3/app.js",
+    "lab4": "nodemon lab4/app.js",
+    "mlab1": "nodemon middleware-lab1/app.js",
+    "mlab2": "nodemon middleware-lab2/app.js",
+    "mlab3": "nodemon middleware-lab3/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.5",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql2": "^3.7.1"
+  }
+}
