@@ -1,0 +1,105 @@
+## REGISTER
+POST /auth/register
+BODY
+  username STRING REQUIRED
+  password STRING REQUIRED
+  confirmPassword REQUIRED SAME AS PASSWORD
+RESPONSE JSON
+  200 message
+    message: success
+  400 message
+    message: validatation error
+  500 message
+    message: internal server
+
+## login
+POST /auth/login
+BODY
+  username STRING REQUIRED
+  password STRING REQUIRED
+RESPONSE JSON
+  200 message
+    message: success
+  400 message
+    message: validatation error
+  500 message
+    message: internal server
+
+## change password
+PATCH /auth/change-password
+BODY
+  username STRING REQUIRED
+  password STRING REQUIRED
+  confirmPassword REQUIRED SAME AS PASSWORD
+RESPONSE JSON
+  200 message
+    message: success
+  400 message
+    message: validatation error
+  500 message
+    message: internal server
+
+## create bill
+POST /bills/add-bill
+BODY  
+  firstName STRING REQUIRED
+  lastName? STRING
+  mobile STRING REQUIRED
+  email? STRING
+  billingDate DATE STRING REQUIRED
+  amount POSITIVE NUMBER REQUIRED
+  dueDate DATE STRING REQUIRED
+  userId INT REQUIRED
+RESPONSE JSON
+  200 message
+    message: success
+  400 message
+    message: validatation error
+  500 message
+    message: internal server
+
+## update bill
+PATCH /bills/update-bill/:billId
+BODY
+  firstName? STRING 
+  lastName? STRING
+  mobile? STRING 
+  email? STRING
+  billingDate? DATE STRING 
+  amount? POSITIVE NUMBER 
+  dueDate? DATE STRING 
+  userId? INT 
+  isPaid? BOOLEAN
+RESPONSE JSON
+  200 message
+    message: success
+  400 message
+    message: validatation error
+  500 message
+    message: internal server
+
+## delete bill
+DELETE /bills/remove-bill/:billId
+RESPONSE JSON
+  204 
+  400 message
+    message: validatation error
+  500 message
+    message: internal server
+
+## get bill
+GET /bills/search?user_id=1&first_name=jim&is_paid=true
+RESPONSE
+  200 bill data
+    billData: [ bill object ] 
+  400 message
+    message: validatation error
+  500 message
+    message: internal server
+
+
+
+
+
+
+
