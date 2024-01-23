@@ -1,0 +1,21 @@
+### REGISTER
+POST /auth/register
+
+### LOGIN
+POST /auth/login
+
+### CHANGE PASSWORD
+PATCH /auth/change-password
+
+### CREATE BILL
+POST /bills
+
+### GET BILL
+GET /bills
+
+### DELETE BILL
+DELETE /bills/:billId
+
+### UPDATE BILL
+PATCH /bills/:billId
+

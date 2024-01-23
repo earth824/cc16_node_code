@@ -88,7 +88,7 @@ RESPONSE JSON
     message: internal server
 
 ## get bill
-GET /bills/search?user_id=1&first_name=jim&is_paid=true
+GET /bills/search?user_id=1&first_name=jim&is_paid=true&page=5&limit=10&sort=due_date
 RESPONSE
   200 bill data
     billData: [ bill object ] 
