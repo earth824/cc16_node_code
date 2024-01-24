@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model brand {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique(map: "Brand_name_key")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  product[]
+}
+
+model order {
+  id        Int         @id @default(autoincrement())
+  date      DateTime    @db.Date
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  userId    Int
+  user      user        @relation(fields: [userId], references: [id], map: "Order_userId_fkey")
+  orderitem orderitem[]
+
+  @@index([userId], map: "Order_userId_fkey")
+}
+
+model orderitem {
+  id        Int      @id @default(autoincrement())
+  price     Decimal  @db.Decimal(10, 2)
+  amount    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orderId   Int
+  productId Int
+  order     order    @relation(fields: [orderId], references: [id], map: "OrderItem_orderId_fkey")
+  product   product  @relation(fields: [productId], references: [id], map: "OrderItem_productId_fkey")
+
+  @@index([orderId], map: "OrderItem_orderId_fkey")
+  @@index([productId], map: "OrderItem_productId_fkey")
+}
+
+model product {
+  id         Int         @id @default(autoincrement())
+  name       String
+  price      Decimal     @db.Decimal(10, 2)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  brandId    Int
+  orderitems orderitem[]
+  brand      brand       @relation(fields: [brandId], references: [id], map: "Product_brandId_fkey")
+
+  @@index([brandId], map: "Product_brandId_fkey")
+}
+
+model user {
+  id        Int       @id @default(autoincrement())
+  username  String    @unique(map: "User_username_key")
+  password  String
+  role      user_role @default(USER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  orders    order[]
+}
+
+enum user_role {
+  ADMIN
+  USER
+}
